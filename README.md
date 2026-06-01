@@ -15,7 +15,7 @@ data*: you change behaviour by editing a YAML number or dropping in an ~8-line r
 file — never by rewriting the engine. See [`ARCHITECTURE.md`](ARCHITECTURE.md) for the
 full rationale and the (heavily-detailed) list of changes the design absorbs.
 
-**Live app:** `<your Streamlit URL>`
+**Live app:** `https://bus-charging-scheduler-bctva8hpcnz6epvjkna88q.streamlit.app/`
 
 ---
 
