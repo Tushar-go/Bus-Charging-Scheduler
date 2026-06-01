@@ -1,0 +1,33 @@
+# =============================================================================
+# Scenario 3 — Asymmetric load
+# A full BK fleet (10 buses, every 15 min) meets a thin KB fleet (only 4 buses,
+# every ~35 min). Tests fairness when one direction dominates demand.
+#   BK = Bengaluru -> Kochi   (BLR -> KOCHI, forward)
+#   KB = Kochi -> Bengaluru   (KOCHI -> BLR, reverse)
+# Total: 14 buses (10 BK + 4 KB).
+# =============================================================================
+schema_version: 1
+scenario_id: scenario_03_asymmetric
+name: "Scenario 3 — Asymmetric load"
+world_ref: ../world.yaml
+station_policy: max_reach
+
+weights: { individual: 1.0, operator: 1.0, overall: 1.0 }
+
+buses:
+  # --- Bengaluru -> Kochi (10 buses, every 15 min from 19:00) --------------
+  - { id: BK-01, operator: kpn,      origin: BLR, destination: KOCHI, departure: "19:00", attrs: {} }
+  - { id: BK-02, operator: freshbus, origin: BLR, destination: KOCHI, departure: "19:15", attrs: {} }
+  - { id: BK-03, operator: flixbus,  origin: BLR, destination: KOCHI, departure: "19:30", attrs: {} }
+  - { id: BK-04, operator: kpn,      origin: BLR, destination: KOCHI, departure: "19:45", attrs: {} }
+  - { id: BK-05, operator: freshbus, origin: BLR, destination: KOCHI, departure: "20:00", attrs: {} }
+  - { id: BK-06, operator: flixbus,  origin: BLR, destination: KOCHI, departure: "20:15", attrs: {} }
+  - { id: BK-07, operator: kpn,      origin: BLR, destination: KOCHI, departure: "20:30", attrs: {} }
+  - { id: BK-08, operator: freshbus, origin: BLR, destination: KOCHI, departure: "20:45", attrs: {} }
+  - { id: BK-09, operator: flixbus,  origin: BLR, destination: KOCHI, departure: "21:00", attrs: {} }
+  - { id: BK-10, operator: kpn,      origin: BLR, destination: KOCHI, departure: "21:15", attrs: {} }
+  # --- Kochi -> Bengaluru (only 4 buses) -----------------------------------
+  - { id: KB-01, operator: freshbus, origin: KOCHI, destination: BLR, departure: "19:00", attrs: {} }
+  - { id: KB-02, operator: flixbus,  origin: KOCHI, destination: BLR, departure: "19:35", attrs: {} }
+  - { id: KB-03, operator: kpn,      origin: KOCHI, destination: BLR, departure: "20:10", attrs: {} }
+  - { id: KB-04, operator: freshbus, origin: KOCHI, destination: BLR, departure: "20:45", attrs: {} }

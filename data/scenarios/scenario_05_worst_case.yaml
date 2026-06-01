@@ -1,0 +1,39 @@
+# =============================================================================
+# Scenario 5 — Worst case convergence
+# All 20 buses (10 each way) depart within a 72-minute window, every 8 minutes
+# from both ends. Maximum contention: forward and reverse fleets collide at the
+# shared mid-corridor chargers at nearly the same time.
+#   BK = Bengaluru -> Kochi   (BLR -> KOCHI, forward)
+#   KB = Kochi -> Bengaluru   (KOCHI -> BLR, reverse)
+# =============================================================================
+schema_version: 1
+scenario_id: scenario_05_worst_case
+name: "Scenario 5 — Worst case convergence"
+world_ref: ../world.yaml
+station_policy: max_reach
+
+weights: { individual: 1.0, operator: 1.0, overall: 1.0 }
+
+buses:
+  # --- Bengaluru -> Kochi (every 8 min from 19:00) -------------------------
+  - { id: BK-01, operator: kpn,      origin: BLR, destination: KOCHI, departure: "19:00", attrs: {} }
+  - { id: BK-02, operator: freshbus, origin: BLR, destination: KOCHI, departure: "19:08", attrs: {} }
+  - { id: BK-03, operator: flixbus,  origin: BLR, destination: KOCHI, departure: "19:16", attrs: {} }
+  - { id: BK-04, operator: kpn,      origin: BLR, destination: KOCHI, departure: "19:24", attrs: {} }
+  - { id: BK-05, operator: freshbus, origin: BLR, destination: KOCHI, departure: "19:32", attrs: {} }
+  - { id: BK-06, operator: flixbus,  origin: BLR, destination: KOCHI, departure: "19:40", attrs: {} }
+  - { id: BK-07, operator: kpn,      origin: BLR, destination: KOCHI, departure: "19:48", attrs: {} }
+  - { id: BK-08, operator: freshbus, origin: BLR, destination: KOCHI, departure: "19:56", attrs: {} }
+  - { id: BK-09, operator: flixbus,  origin: BLR, destination: KOCHI, departure: "20:04", attrs: {} }
+  - { id: BK-10, operator: kpn,      origin: BLR, destination: KOCHI, departure: "20:12", attrs: {} }
+  # --- Kochi -> Bengaluru (every 8 min from 19:00) -------------------------
+  - { id: KB-01, operator: freshbus, origin: KOCHI, destination: BLR, departure: "19:00", attrs: {} }
+  - { id: KB-02, operator: flixbus,  origin: KOCHI, destination: BLR, departure: "19:08", attrs: {} }
+  - { id: KB-03, operator: kpn,      origin: KOCHI, destination: BLR, departure: "19:16", attrs: {} }
+  - { id: KB-04, operator: freshbus, origin: KOCHI, destination: BLR, departure: "19:24", attrs: {} }
+  - { id: KB-05, operator: flixbus,  origin: KOCHI, destination: BLR, departure: "19:32", attrs: {} }
+  - { id: KB-06, operator: kpn,      origin: KOCHI, destination: BLR, departure: "19:40", attrs: {} }
+  - { id: KB-07, operator: freshbus, origin: KOCHI, destination: BLR, departure: "19:48", attrs: {} }
+  - { id: KB-08, operator: flixbus,  origin: KOCHI, destination: BLR, departure: "19:56", attrs: {} }
+  - { id: KB-09, operator: kpn,      origin: KOCHI, destination: BLR, departure: "20:04", attrs: {} }
+  - { id: KB-10, operator: freshbus, origin: KOCHI, destination: BLR, departure: "20:12", attrs: {} }

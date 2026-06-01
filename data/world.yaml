@@ -1,0 +1,54 @@
+# =============================================================================
+# Shared physical world — the route corridor, its physics, and its operators.
+#
+# This file is PURE DATA. The engine never hard-codes any of these facts:
+#   * which nodes exist, their order, or which carry chargers,
+#   * segment distances (station positions + travel times are DERIVED),
+#   * battery range / speed / charge duration,
+#   * who the operators are.
+# Every scenario references this single world via `world_ref`.
+# =============================================================================
+schema_version: 1
+world_id: blr-kochi-corridor
+
+# -----------------------------------------------------------------------------
+# Defaults applied to every node/bus unless overridden per-node.
+# speed_kmph: 60 km/h  =>  1 km == 1 minute of travel time.
+# -----------------------------------------------------------------------------
+defaults:
+  battery_range_km: 240
+  speed_kmph: 60                       # 60 km/h => 1 km = 1 min
+  charge: { duration_min: 25, target: full }
+  charger_capacity: 1                  # default capacity for a node that has a charger
+
+# -----------------------------------------------------------------------------
+# Nodes, in route order (sequence). A node is a charging STATION iff it has a
+# `charger` block with capacity > 0. Endpoints simply omit `charger`.
+# A per-node `charger.duration_min` may override the physics default.
+# -----------------------------------------------------------------------------
+nodes:
+  - { id: BLR,   sequence: 0, role: terminal }                      # endpoint: no charger
+  - { id: A,     sequence: 1, role: station, charger: { capacity: 1 } }
+  - { id: B,     sequence: 2, role: station, charger: { capacity: 1 } }
+  - { id: C,     sequence: 3, role: station, charger: { capacity: 1 } }
+  - { id: D,     sequence: 4, role: station, charger: { capacity: 1 } }
+  - { id: KOCHI, sequence: 5, role: terminal }                      # endpoint: no charger
+
+# -----------------------------------------------------------------------------
+# Segments connect consecutive nodes. Distances (km) drive both station
+# positions and travel times. Total corridor = 100+120+100+120+100 = 540 km.
+# -----------------------------------------------------------------------------
+segments:
+  - { from: BLR, to: A,     distance_km: 100 }
+  - { from: A,   to: B,     distance_km: 120 }
+  - { from: B,   to: C,     distance_km: 100 }
+  - { from: C,   to: D,     distance_km: 120 }
+  - { from: D,   to: KOCHI, distance_km: 100 }
+
+# -----------------------------------------------------------------------------
+# Operators sharing the corridor.
+# -----------------------------------------------------------------------------
+operators:
+  - { id: kpn,      name: KPN }
+  - { id: freshbus, name: Freshbus }
+  - { id: flixbus,  name: Flixbus }

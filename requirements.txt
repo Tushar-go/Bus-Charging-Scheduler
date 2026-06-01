@@ -1,0 +1,6 @@
+# Runtime dependencies (Streamlit Community Cloud installs these automatically).
+# Pinned to latest stable as of 2026-05; Streamlit 1.58 declares pandas<4,>=1.4 so 3.x is fine.
+# Requires Python 3.11+ (pandas 3.x). On Streamlit Cloud set Python 3.12 in Advanced settings.
+streamlit==1.58.0
+pandas==3.0.3
+PyYAML==6.0.3
